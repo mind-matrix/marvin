@@ -1,0 +1,44 @@
+{
+  "name": "marvin",
+  "version": "1.0.0",
+  "engines": {
+    "node": "12.x"
+  },
+  "description": "Project Marvin - WebRTC-Powered IoT Microservices Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index",
+    "start": "cd web && npm run build && cd .. && node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "marvin",
+    "webrtc",
+    "iot"
+  ],
+  "author": "Sagnik Modak",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "collections": "^5.1.9",
+    "compression": "^1.7.4",
+    "connect-history-api-fallback": "^1.6.0",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "keygen": "^0.3.1",
+    "mocha": "^7.1.0",
+    "mongoose": "^5.9.3",
+    "uniqid": "^5.2.0",
+    "ws": "^7.2.3"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
+  },
+  "devDependencies": {
+    "@mdi/font": "^5.0.45",
+    "cors": "^2.8.5"
+  }
+}
