@@ -24,15 +24,6 @@ function getBytes(string){
 }
 
 mongoose.connect('mongodb://localhost:27017/marvin', {useNewUrlParser: true}).then(() => {
-  const webApp = express();
-  webApp.use(history());
-
-  webApp.use(express.static('web/dist'));
-
-  webApp.listen(80, () => {
-    console.log(`Web Server running at port 80`);
-  });
-
   const api = express();
 
   api.use(cors());
@@ -369,7 +360,7 @@ mongoose.connect('mongodb://localhost:27017/marvin', {useNewUrlParser: true}).th
     });
   });
 
-  api.listen(8000, () => {
-    console.log(`API Server running at port 8000`);
+  api.listen(80, () => {
+    console.log(`API Server running at port 80`);
   });
 });
