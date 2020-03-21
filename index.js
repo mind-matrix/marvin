@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -237,7 +238,9 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
     }
   });
 
-  const wss = new WebSocket.Server({ server: api });
+  const server = http.createServer(api)
+
+  const wss = new WebSocket.Server({ server });
   
   wss.on('connection', (ws) => {
     ws.on('message', async function (message) {
@@ -359,7 +362,7 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
     });
   });
 
-  api.listen(process.env.PORT || 80, () => {
-    console.log(`API Server running at port 80`);
+  server.listen(process.env.PORT || 80, () => {
+    console.log(`API Server running at port ${process.env.PORT || 80}`);
   });
 });
