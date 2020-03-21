@@ -31,14 +31,14 @@
     "mocha": "^7.1.0",
     "mongoose": "^5.9.3",
     "uniqid": "^5.2.0",
-    "ws": "^7.2.3"
+    "ws": "^7.2.3",
+    "cors": "^2.8.5"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
   },
   "devDependencies": {
-    "@mdi/font": "^5.0.45",
-    "cors": "^2.8.5"
+    "@mdi/font": "^5.0.45"
   }
 }

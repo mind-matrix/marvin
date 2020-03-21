@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const FastMap = require('collections/fast-map');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const history = require('connect-history-api-fallback');
 const { Service, User } = require('./model');
 const { readFileSync } = require('fs');
 const ExpressWebSocket = require('express-ws');
