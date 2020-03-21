@@ -23,7 +23,7 @@ function getBytes(string){
   return Buffer.byteLength(string, 'utf8')
 }
 
-mongoose.connect('mongodb://localhost:27017/marvin', {useNewUrlParser: true}).then(() => {
+mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true}).then(() => {
   const api = express();
 
   api.use(cors());
