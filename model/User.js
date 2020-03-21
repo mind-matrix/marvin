@@ -10,13 +10,11 @@ const userSchema = new Schema({
     required: true
   },
   password: {
-    type: {
-      hash: {
-        type: String
-      },
-      salt: {
-        type: String
-      }
+    hash: {
+      type: String
+    },
+    salt: {
+      type: String
     },
     select: false
   },
