@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { Service, User } = require('./model');
 const { readFileSync } = require('fs');
-const ExpressWebSocket = require('express-ws');
+const WebSocket = require('ws');
 const uniqid = require('uniqid');
 
 const cors = require('cors');
@@ -26,8 +26,6 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
   const api = express();
 
   api.use(cors());
-
-  const expressWs = ExpressWebSocket(api);
 
   api.use(compression());
 
@@ -239,7 +237,9 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
     }
   });
 
-  api.ws('/message', function (ws) {
+  const wss = new WebSocket.Server({ server: api });
+  
+  wss.on('connection', (ws) => {
     ws.on('message', async function (message) {
       var req = JSON.parse(message);
       let service;

@@ -24,20 +24,14 @@
     "collections": "^5.1.9",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "express-ws": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "keygen": "^0.3.1",
     "mocha": "^7.1.0",
     "mongoose": "^5.9.3",
     "uniqid": "^5.2.0",
     "ws": "^7.2.3",
-    "cors": "^2.8.5"
-  },
-  "optionalDependencies": {
+    "cors": "^2.8.5",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
-  },
-  "devDependencies": {
-    "@mdi/font": "^5.0.45"
   }
 }
