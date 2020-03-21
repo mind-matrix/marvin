@@ -359,7 +359,7 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
     });
   });
 
-  api.listen(80, () => {
+  api.listen(process.env.PORT || 80, () => {
     console.log(`API Server running at port 80`);
   });
 });
