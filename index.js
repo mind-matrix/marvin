@@ -285,13 +285,19 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
               }
               var activeServiceInstance = services.get(service.identifier);
               var listener = activeServiceInstance.listeners.get(req.data.clientId);
-              listener.send(
-                JSON.stringify({
-                  serviceId: service.identifier,
-                  message: req.data.message
-                })
-              );
-              service.usage += getBytes(JSON.stringify(req.data.message));
+              if(listener) {
+                listener.send(
+                  JSON.stringify({
+                    serviceId: service.identifier,
+                    message: req.data.message
+                  })
+                );
+                service.usage += getBytes(JSON.stringify(req.data.message));
+              } else {
+                ws.send(JSON.stringify({
+                  error: `Client is not in the swarm`
+                }));
+              }
             }
           }
           service.save();
