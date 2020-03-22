@@ -267,7 +267,7 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
               service.status = SERVICE.STATUS.QUOTA_EXPIRED;
             services.set(service.identifier, {
               connection: ws,
-              listeners: new Map()
+              listeners: new FastMap()
             });
             ws.id = service.identifier;
           } else if(ws.id) {
@@ -302,15 +302,21 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
           if(service.scope === SERVICE.SCOPE.PUBLIC) {
             var clientId = uniqid(service.identifier);
             var activeServiceInstance = services.get(service.identifier);
-            activeServiceInstance.listeners.set(clientId, ws);
-            activeServiceInstance.connection.send(
-              JSON.stringify({
-                clientId,
-                message: req.data.message
-              })
-            );
-            service.usage += getBytes(JSON.stringify(req.data.message));
-            service.save();
+            if(activeServiceInstance) {
+              activeServiceInstance.listeners.set(clientId, ws);
+              activeServiceInstance.connection.send(
+                JSON.stringify({
+                  clientId,
+                  message: req.data.message
+                })
+              );
+              service.usage += getBytes(JSON.stringify(req.data.message));
+              service.save();
+            } else {
+              ws.send(JSON.stringify({
+                error: `Service is not available`
+              }));
+            }
           } else if(
             service.scope === SERVICE.SCOPE.PRIVATE && 
             req.data.key && 
@@ -351,6 +357,7 @@ mongoose.connect('mongodb+srv://marvin:JyZtmjwpslIwf8vn@cluster0-84baf.mongodb.n
       if(ws.id && services.has(ws.id)) {
         let service = await Service.findOne({ identifier: ws.id });
         service.status = SERVICE.STATUS.UNAVAILABLE;
+        await service.save();
         services.delete(ws.id);
         ws.id = undefined;
       }
